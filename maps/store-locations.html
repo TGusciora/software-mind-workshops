@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizza Store Map</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--bg:#fbf8f3;--fg:#1f1b16;--muted:#6b635a;--card:#fff;--border:#e6dfd4;--open:#1f8a4c;--planned:#d9822b;--franchise:#7b4bc4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15130f;--fg:#f2ede5;--muted:#a79e92;--card:#1f1c17;--border:#37322a}}
+:root[data-theme="dark"]{--bg:#15130f;--fg:#f2ede5;--muted:#a79e92;--card:#1f1c17;--border:#37322a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,sans-serif}
+header{padding:16px}h1{margin:0 0 4px;font-size:1.4rem}p{margin:0;color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:0 16px 12px}
+label{display:flex;align-items:center;gap:6px;cursor:pointer}.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+#count{margin-left:auto;font-weight:600}
+#map{height:calc(100vh - 150px);min-height:420px;margin:0 16px 16px;border:1px solid var(--border);border-radius:10px}
+.leaflet-popup-content{font:14px/1.4 system-ui,sans-serif}
+</style>
+</head>
+<body>
+<header><h1>🍕 Pizza Store Map</h1><p>Sample data: replace it with real addresses. Texas core first, then US expansion.</p></header>
+<div class="bar" id="filters"><span id="count"></span></div>
+<div id="map"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const STATUS={open:{label:"Open",color:"var(--open)",hex:"#1f8a4c"},planned:{label:"Planned",color:"var(--planned)",hex:"#d9822b"},"franchise-test":{label:"Franchise test",color:"var(--franchise)",hex:"#7b4bc4"}};
+const STORES=[
+{name:"Austin – South Congress",city:"Austin",state:"TX",lat:30.2500,lng:-97.7494,status:"open",phase:"Days 1–30"},
+{name:"Austin – Ghost Kitchen",city:"Austin",state:"TX",lat:30.3072,lng:-97.7560,status:"open",phase:"Days 31–60"},
+{name:"Austin – Mueller",city:"Austin",state:"TX",lat:30.2980,lng:-97.7050,status:"open",phase:"Days 31–60"},
+{name:"Dallas – Deep Ellum",city:"Dallas",state:"TX",lat:32.7845,lng:-96.7837,status:"planned",phase:"Days 61–120"},
+{name:"Dallas – Ghost Kitchen",city:"Dallas",state:"TX",lat:32.8140,lng:-96.8480,status:"planned",phase:"Days 61–120"},
+{name:"Houston – Montrose",city:"Houston",state:"TX",lat:29.7449,lng:-95.3900,status:"planned",phase:"Days 121–180"},
+{name:"San Antonio – Ghost Kitchen",city:"San Antonio",state:"TX",lat:29.4241,lng:-98.4936,status:"franchise-test",phase:"Days 121–180"},
+{name:"Oklahoma City",city:"Oklahoma City",state:"OK",lat:35.4676,lng:-97.5164,status:"planned",phase:"Year 2"},
+{name:"Phoenix",city:"Phoenix",state:"AZ",lat:33.4484,lng:-112.0740,status:"franchise-test",phase:"Year 2"},
+{name:"Denver",city:"Denver",state:"CO",lat:39.7392,lng:-104.9903,status:"planned",phase:"Year 2"},
+{name:"Atlanta",city:"Atlanta",state:"GA",lat:33.7490,lng:-84.3880,status:"franchise-test",phase:"Year 2"},
+{name:"Nashville",city:"Nashville",state:"TN",lat:36.1627,lng:-86.7816,status:"planned",phase:"Year 2"},
+{name:"Chicago",city:"Chicago",state:"IL",lat:41.8781,lng:-87.6298,status:"planned",phase:"Year 3"},
+{name:"Los Angeles",city:"Los Angeles",state:"CA",lat:34.0522,lng:-118.2437,status:"planned",phase:"Year 3"},
+{name:"New York",city:"New York",state:"NY",lat:40.7128,lng:-74.0060,status:"planned",phase:"Year 3"}];
+const map=L.map("map",{scrollWheelZoom:true});
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
+map.fitBounds([[24.5,-125],[49.5,-66.9]]);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const groups={};
+for(const k in STATUS)groups[k]=L.layerGroup().addTo(map);
+STORES.forEach(s=>L.circleMarker([s.lat,s.lng],{radius:9,color:"#fff",weight:2,fillColor:STATUS[s.status].hex,fillOpacity:.95})
+ .bindPopup(`<strong>${esc(s.name)}</strong><br>${esc(s.city)}, ${esc(s.state)}<br>Status: ${STATUS[s.status].label}<br>Phase: ${esc(s.phase)}`).addTo(groups[s.status]));
+const bar=document.getElementById("filters"),count=document.getElementById("count");
+function update(){let n=0;for(const k in STATUS)if(map.hasLayer(groups[k]))n+=STORES.filter(s=>s.status===k).length;count.textContent=`${n} of ${STORES.length} stores`}
+for(const k in STATUS){const l=document.createElement("label");const n=STORES.filter(s=>s.status===k).length;
+ l.innerHTML=`<input type="checkbox" checked><span class="dot" style="background:${STATUS[k].color}"></span>${STATUS[k].label} (${n})`;
+ l.querySelector("input").onchange=e=>{e.target.checked?groups[k].addTo(map):map.removeLayer(groups[k]);update()};bar.insertBefore(l,count)}
+update();
+</script>
+</body>
+</html>
