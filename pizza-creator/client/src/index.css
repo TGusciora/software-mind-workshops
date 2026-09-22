@@ -1,0 +1,76 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 1.5rem;
+  background: #fafafa;
+  color: #222;
+}
+
+.app main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.builder-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.ingredient-catalog,
+.pizza-builder,
+.save-dialog,
+.saved-pizza-list {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+}
+
+li span:first-child {
+  flex: 1;
+}
+
+.price {
+  color: #666;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #b00020;
+}
+
+.warning {
+  color: #b06000;
+}
+
+.confirmation {
+  color: #1b7a1b;
+}
+
+button {
+  cursor: pointer;
+}
