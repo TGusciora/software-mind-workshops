@@ -9,5 +9,10 @@
       "Read(**/.env)",
       "Read(**/.env.*)"
     ]
+  },
+  "respectGitignore": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"$(git rev-parse --show-toplevel)/.claude/statusline-command.sh\""
   }
 }
