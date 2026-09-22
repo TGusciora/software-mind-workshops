@@ -4,21 +4,27 @@ import PizzaBuilder from "./components/PizzaBuilder.jsx";
 import SaveDialog from "./components/SaveDialog.jsx";
 import SavedPizzaList from "./components/SavedPizzaList.jsx";
 import { fetchIngredients, fetchPizza, fetchPizzas, savePizza } from "./api.js";
-import { SIZES, canAddTopping, validatePizza } from "./pizzaLogic.js";
+import { SIZES, toggleIngredient, validatePizza } from "./pizzaLogic.js";
 
 export default function App() {
   const [ingredients, setIngredients] = useState([]);
+  const [ingredientsLoading, setIngredientsLoading] = useState(true);
   const [size, setSize] = useState(SIZES[0]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [toppingLimitMessage, setToppingLimitMessage] = useState(null);
+  const [selectionMessage, setSelectionMessage] = useState(null);
+  const [name, setName] = useState("");
   const [saveError, setSaveError] = useState(null);
+  const [saving, setSaving] = useState(false);
   const [confirmation, setConfirmation] = useState(null);
   const [pizzas, setPizzas] = useState([]);
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
-    fetchIngredients().then(setIngredients).catch((err) => setLoadError(err.message));
+    fetchIngredients()
+      .then(setIngredients)
+      .catch((err) => setLoadError(err.message))
+      .finally(() => setIngredientsLoading(false));
     refreshPizzas();
   }, []);
 
@@ -26,41 +32,52 @@ export default function App() {
     fetchPizzas().then(setPizzas).catch((err) => setLoadError(err.message));
   }
 
-  function handleAdd(ingredient) {
-    setToppingLimitMessage(null);
-
-    if (ingredient.category === "topping") {
-      if (selectedIngredients.some((i) => i.id === ingredient.id)) return;
-      if (!canAddTopping(selectedIngredients)) {
-        setToppingLimitMessage("Topping limit reached. Remove one to add another.");
-        return;
-      }
-      setSelectedIngredients([...selectedIngredients, ingredient]);
-      return;
-    }
-
-    // base/sauce/cheese: only one of each category at a time
-    const withoutCategory = selectedIngredients.filter((i) => i.category !== ingredient.category);
-    setSelectedIngredients([...withoutCategory, ingredient]);
-  }
-
-  function handleRemove(ingredient) {
-    setToppingLimitMessage(null);
-    setSelectedIngredients(selectedIngredients.filter((i) => i.id !== ingredient.id));
-  }
-
-  async function handleSave(name) {
+  // Any edit invalidates the previous save feedback, so the confirmation never
+  // describes a pizza that is no longer on screen.
+  function clearSaveFeedback() {
+    setSaveError(null);
     setConfirmation(null);
+  }
+
+  function handleToggle(ingredient) {
+    const result = toggleIngredient(selectedIngredients, ingredient);
+    setSelectedIngredients(result.selectedIngredients);
+    setSelectionMessage(result.message ? { text: result.message, blocked: result.blocked } : null);
+    clearSaveFeedback();
+  }
+
+  function handleSizeChange(nextSize) {
+    setSize(nextSize);
+    clearSaveFeedback();
+  }
+
+  function handleNameChange(nextName) {
+    setName(nextName);
+    clearSaveFeedback();
+  }
+
+  function handleStartOver() {
+    setSelectedIngredients([]);
+    setSize(SIZES[0]);
+    setName("");
+    setSelectionMessage(null);
+    clearSaveFeedback();
+  }
+
+  async function handleSave() {
     const validationError = validatePizza(selectedIngredients);
     if (validationError) {
+      setConfirmation(null);
       setSaveError(validationError);
       return;
     }
-    if (!name || !name.trim()) {
+    if (!name.trim()) {
+      setConfirmation(null);
       setSaveError("Please give your pizza a name.");
       return;
     }
 
+    setSaving(true);
     try {
       const saved = await savePizza({
         name: name.trim(),
@@ -71,7 +88,10 @@ export default function App() {
       setConfirmation(saved);
       refreshPizzas();
     } catch (err) {
+      setConfirmation(null);
       setSaveError(err.message);
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -90,22 +110,41 @@ export default function App() {
     <div className="app">
       <header>
         <h1>Pizza Creator</h1>
+        <p className="tagline">Build your pizza, name it, and we'll remember it.</p>
       </header>
 
-      {loadError && <p className="error">{loadError}</p>}
+      {loadError && (
+        <p className="error" role="alert">
+          {loadError}
+        </p>
+      )}
 
       <main>
-        <IngredientCatalog ingredients={ingredients} selectedIds={selectedIds} onAdd={handleAdd} />
+        <IngredientCatalog
+          ingredients={ingredients}
+          loading={ingredientsLoading}
+          selectedIds={selectedIds}
+          selectedIngredients={selectedIngredients}
+          onToggle={handleToggle}
+        />
 
         <div className="builder-column">
           <PizzaBuilder
             size={size}
-            onSizeChange={setSize}
+            onSizeChange={handleSizeChange}
             selectedIngredients={selectedIngredients}
-            onRemove={handleRemove}
-            toppingLimitMessage={toppingLimitMessage}
+            onRemove={handleToggle}
+            selectionMessage={selectionMessage}
+            onStartOver={handleStartOver}
           />
-          <SaveDialog onSave={handleSave} error={saveError} confirmation={confirmation} />
+          <SaveDialog
+            name={name}
+            onNameChange={handleNameChange}
+            onSave={handleSave}
+            saving={saving}
+            error={saveError}
+            confirmation={confirmation}
+          />
         </div>
 
         <SavedPizzaList pizzas={pizzas} onSelect={handleSelectPizza} selectedPizza={selectedPizza} />

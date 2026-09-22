@@ -1,38 +1,52 @@
-import { SIZES, totalPrice } from "../pizzaLogic";
+import { MAX_TOPPINGS, SIZES, sortByCategory, toppingCount, totalPrice } from "../pizzaLogic";
 
 export default function PizzaBuilder({
   size,
   onSizeChange,
   selectedIngredients,
   onRemove,
-  toppingLimitMessage,
+  selectionMessage,
+  onStartOver,
 }) {
+  const summary = sortByCategory(selectedIngredients);
+
   return (
     <div className="pizza-builder">
-      <h2>Your Pizza</h2>
+      <div className="panel-header">
+        <h2>Your Pizza</h2>
+        {selectedIngredients.length > 0 && (
+          <button type="button" className="link-button" onClick={onStartOver}>
+            Start over
+          </button>
+        )}
+      </div>
 
-      <label>
-        Size
-        <select value={size} onChange={(e) => onSizeChange(e.target.value)}>
-          {SIZES.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-      </label>
+      <label htmlFor="pizza-size">Size</label>
+      <select id="pizza-size" value={size} onChange={(e) => onSizeChange(e.target.value)}>
+        {SIZES.map((s) => (
+          <option key={s} value={s}>
+            {s}
+          </option>
+        ))}
+      </select>
 
-      {toppingLimitMessage && <p className="warning">{toppingLimitMessage}</p>}
+      <p aria-live="polite" className={selectionMessage?.blocked ? "warning" : "muted"}>
+        {selectionMessage?.text ?? ""}
+      </p>
 
-      {selectedIngredients.length === 0 ? (
-        <p>No ingredients selected yet.</p>
+      {summary.length === 0 ? (
+        <p className="muted">No ingredients selected yet. Start with a base.</p>
       ) : (
         <ul className="pizza-summary">
-          {selectedIngredients.map((ingredient) => (
+          {summary.map((ingredient) => (
             <li key={ingredient.id}>
               <span>{ingredient.name}</span>
               <span className="price">${ingredient.unit_price.toFixed(2)}</span>
-              <button type="button" onClick={() => onRemove(ingredient)}>
+              <button
+                type="button"
+                onClick={() => onRemove(ingredient)}
+                aria-label={`Remove ${ingredient.name}`}
+              >
                 Remove
               </button>
             </li>
@@ -40,7 +54,12 @@ export default function PizzaBuilder({
         </ul>
       )}
 
-      <p className="total">Total: ${totalPrice(selectedIngredients).toFixed(2)}</p>
+      <p className="total">
+        Total: ${totalPrice(selectedIngredients).toFixed(2)}
+        <span className="hint">
+          {size} · {toppingCount(selectedIngredients)} of {MAX_TOPPINGS} toppings
+        </span>
+      </p>
     </div>
   );
 }

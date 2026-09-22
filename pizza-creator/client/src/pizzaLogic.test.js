@@ -4,6 +4,8 @@ import {
   canAddTopping,
   groupByCategory,
   hasBase,
+  sortByCategory,
+  toggleIngredient,
   totalPrice,
   validatePizza,
 } from "./pizzaLogic";
@@ -65,5 +67,67 @@ describe("validatePizza", () => {
 
   it("passes when a base is present", () => {
     expect(validatePizza([base])).toBeNull();
+  });
+});
+
+describe("sortByCategory", () => {
+  it("orders the summary base, sauce, cheese, toppings regardless of click order", () => {
+    const sorted = sortByCategory([pepperoni, cheese, base, sauce]);
+    expect(sorted.map((i) => i.category)).toEqual(["base", "sauce", "cheese", "topping"]);
+  });
+
+  it("keeps click order within a category and does not mutate the input", () => {
+    const input = [mushrooms, pepperoni];
+    expect(sortByCategory(input)).toEqual([mushrooms, pepperoni]);
+    expect(input).toEqual([mushrooms, pepperoni]);
+  });
+});
+
+describe("toggleIngredient", () => {
+  it("adds an unselected ingredient", () => {
+    const { selectedIngredients } = toggleIngredient([base], pepperoni);
+    expect(selectedIngredients).toEqual([base, pepperoni]);
+  });
+
+  it("removes an already selected ingredient", () => {
+    const { selectedIngredients } = toggleIngredient([base, pepperoni], pepperoni);
+    expect(selectedIngredients).toEqual([base]);
+  });
+
+  it("replaces the current pick for single-choice categories", () => {
+    const thinCrust = { id: 9, name: "Thin crust", category: "base", unit_price: 3 };
+    const { selectedIngredients, message } = toggleIngredient([base, pepperoni], thinCrust);
+    expect(selectedIngredients).toContainEqual(thinCrust);
+    expect(selectedIngredients).not.toContainEqual(base);
+    expect(selectedIngredients).toContainEqual(pepperoni);
+    expect(message).toMatch(/swapped/i);
+  });
+
+  it("blocks a topping past the limit and explains why", () => {
+    const maxedOut = [
+      base,
+      ...Array.from({ length: MAX_TOPPINGS }, (_, i) => ({
+        id: 100 + i,
+        name: `Topping ${i}`,
+        category: "topping",
+        unit_price: 1,
+      })),
+    ];
+    const { selectedIngredients, message, blocked } = toggleIngredient(maxedOut, pepperoni);
+    expect(selectedIngredients).toEqual(maxedOut);
+    expect(blocked).toBe(true);
+    expect(message).toMatch(/limit/i);
+  });
+
+  it("still allows removing a topping when the limit is reached", () => {
+    const toppings = Array.from({ length: MAX_TOPPINGS }, (_, i) => ({
+      id: 100 + i,
+      name: `Topping ${i}`,
+      category: "topping",
+      unit_price: 1,
+    }));
+    const { selectedIngredients, blocked } = toggleIngredient([base, ...toppings], toppings[0]);
+    expect(selectedIngredients).toHaveLength(MAX_TOPPINGS);
+    expect(blocked).toBe(false);
   });
 });
