@@ -1,0 +1,8 @@
+{
+  "skill_name": "user-story-creator",
+  "evals": [
+    {"id": 0, "prompt": "We're launching a loyalty program for our Texas pizza restaurants: points per order, free pizza rewards, birthday deals. Write the user stories so we can spec it next.", "expected_output": "Interview questions asked first; stories file in docs/stories with personas, epics, Connextra stories with Gherkin AC and MoSCoW, assumptions, open questions", "files": []},
+    {"id": 1, "prompt": "I need user stories for a shift scheduling tool for staff across our 12 stores. Managers currently do it in a spreadsheet.", "expected_output": "Same structure; multiple personas (manager, staff, owner)", "files": []},
+    {"id": 2, "prompt": "break down a customer feedback thing for us", "expected_output": "Vague prompt: skill should lean on interview + repo context, record many assumptions", "files": []}
+  ]
+}
