@@ -1,0 +1,200 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 1.5rem;
+  background: #fafafa;
+  color: #222;
+}
+
+.app main {
+  /* Collapses to two columns, then one, so the builder works on a phone. */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.builder-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.tagline {
+  margin-top: 0;
+  color: #666;
+}
+
+.ingredient-catalog,
+.pizza-builder,
+.save-dialog,
+.saved-pizza-list {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.app ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.4rem;
+  border-radius: 6px;
+}
+
+.app li > span:first-child {
+  flex: 1;
+}
+
+.app li.selected {
+  background: #f1f7f1;
+}
+
+h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.hint,
+.muted {
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.price {
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
+.total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+.error {
+  color: #b00020;
+}
+
+.warning {
+  color: #b06000;
+}
+
+.confirmation {
+  color: #1b7a1b;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.25rem;
+}
+
+select,
+input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.45rem 0.5rem;
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  /* Keeps rows from shifting when "Add" becomes "Added ✓". */
+  min-width: 5.5rem;
+}
+
+button:hover:not(:disabled) {
+  border-color: #888;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+button[aria-pressed="true"] {
+  background: #1b7a1b;
+  border-color: #1b7a1b;
+  color: white;
+}
+
+.save-dialog button[type="submit"] {
+  width: 100%;
+  background: #b00020;
+  border-color: #b00020;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem;
+}
+
+.save-dialog button[type="submit"]:disabled {
+  background: #888;
+  border-color: #888;
+}
+
+.link-button,
+.saved-pizza-button {
+  min-width: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: left;
+  color: #0b5ea8;
+  text-decoration: underline;
+}
+
+.saved-pizza-button[aria-current="true"] {
+  font-weight: bold;
+}
+
+:focus-visible {
+  outline: 2px solid #0b5ea8;
+  outline-offset: 2px;
+}
+
+.saved-pizza-detail {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eee;
+}
