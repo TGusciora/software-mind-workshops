@@ -1,0 +1,14 @@
+{
+  "eval_id": 1,
+  "eval_name": "slack-standup-bot",
+  "prompt": "Spec out a Slack bot that summarizes daily standups.",
+  "assertions": [
+    "Questionnaire of goals, scope and tech was produced",
+    "Spec has Goals/vision section",
+    "Spec has Scope with in/out of scope",
+    "Spec has numbered requirements with must/should/could priority",
+    "Spec has Technology section with rationale",
+    "Spec records assumptions and open questions",
+    "Spec has Milestones"
+  ]
+}

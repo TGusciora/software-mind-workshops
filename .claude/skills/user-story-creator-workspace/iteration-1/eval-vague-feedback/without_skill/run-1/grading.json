@@ -1,0 +1,65 @@
+{
+  "expectations": [
+    {
+      "text": "Interview questions (>=4) were produced before writing",
+      "passed": true,
+      "evidence": "questionnaire.md found, ~15 questions"
+    },
+    {
+      "text": "Questions offer concrete options with a recommendation",
+      "passed": false,
+      "evidence": "questionnaire mentions options and a recommendation"
+    },
+    {
+      "text": "Stories file has a Personas section",
+      "passed": true,
+      "evidence": "Personas heading found"
+    },
+    {
+      "text": "Stories are grouped under epics (>=2)",
+      "passed": true,
+      "evidence": "6 epic headings"
+    },
+    {
+      "text": "Every story uses 'As a / I want / so that'",
+      "passed": true,
+      "evidence": "23/23 stories with 'so that'"
+    },
+    {
+      "text": "Every story has Given/When/Then acceptance criteria",
+      "passed": false,
+      "evidence": "21/23 stories with Given/When/Then"
+    },
+    {
+      "text": "Every story has a MoSCoW priority",
+      "passed": true,
+      "evidence": "23/23 stories with a priority"
+    },
+    {
+      "text": "Every story has a unique stable ID",
+      "passed": true,
+      "evidence": "23 stories, 23 unique IDs (e.g. ['US-1.1', 'US-1.2', 'US-1.3'])"
+    },
+    {
+      "text": "Stories file has an Out of scope section",
+      "passed": true,
+      "evidence": "Out of scope heading check"
+    },
+    {
+      "text": "Stories file itself lists Assumptions and Open questions",
+      "passed": false,
+      "evidence": "Assumptions + Open questions headings in stories file"
+    },
+    {
+      "text": "Every 'As a' persona appears in the Personas section",
+      "passed": true,
+      "evidence": "7 distinct 'As a' roles; not in Personas: []"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 3,
+    "total": 11,
+    "pass_rate": 0.7272727272727273
+  }
+}

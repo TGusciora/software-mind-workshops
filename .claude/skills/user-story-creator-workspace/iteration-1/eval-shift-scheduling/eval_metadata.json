@@ -1,0 +1,18 @@
+{
+  "eval_id": 1,
+  "eval_name": "shift-scheduling",
+  "prompt": "I need user stories for a shift scheduling tool for staff across our 12 stores. Managers currently do it in a spreadsheet.",
+  "assertions": [
+    "Interview questions (>=4) were produced before writing",
+    "Questions offer concrete options with a recommendation",
+    "Stories file has a Personas section",
+    "Stories are grouped under epics (>=2)",
+    "Every story uses 'As a / I want / so that'",
+    "Every story has Given/When/Then acceptance criteria",
+    "Every story has a MoSCoW priority",
+    "Every story has a unique stable ID",
+    "Stories file has an Out of scope section",
+    "Stories file itself lists Assumptions and Open questions",
+    "Every 'As a' persona appears in the Personas section"
+  ]
+}

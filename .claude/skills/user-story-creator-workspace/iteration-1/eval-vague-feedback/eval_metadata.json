@@ -1,0 +1,18 @@
+{
+  "eval_id": 2,
+  "eval_name": "vague-feedback",
+  "prompt": "break down a customer feedback thing for us",
+  "assertions": [
+    "Interview questions (>=4) were produced before writing",
+    "Questions offer concrete options with a recommendation",
+    "Stories file has a Personas section",
+    "Stories are grouped under epics (>=2)",
+    "Every story uses 'As a / I want / so that'",
+    "Every story has Given/When/Then acceptance criteria",
+    "Every story has a MoSCoW priority",
+    "Every story has a unique stable ID",
+    "Stories file has an Out of scope section",
+    "Stories file itself lists Assumptions and Open questions",
+    "Every 'As a' persona appears in the Personas section"
+  ]
+}

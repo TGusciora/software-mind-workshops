@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "Questionnaire of goals, scope and tech was produced",
+      "passed": false,
+      "evidence": "checked spec text for expected headings/keywords"
+    },
+    {
+      "text": "Spec has Goals/vision section",
+      "passed": true,
+      "evidence": "checked spec text for expected headings/keywords"
+    },
+    {
+      "text": "Spec has Scope with in/out of scope",
+      "passed": false,
+      "evidence": "checked spec text for expected headings/keywords"
+    },
+    {
+      "text": "Spec has numbered requirements with must/should/could priority",
+      "passed": true,
+      "evidence": "checked spec text for expected headings/keywords"
+    },
+    {
+      "text": "Spec has Technology section with rationale",
+      "passed": false,
+      "evidence": "checked spec text for expected headings/keywords"
+    },
+    {
+      "text": "Spec records assumptions and open questions",
+      "passed": true,
+      "evidence": "checked spec text for expected headings/keywords"
+    },
+    {
+      "text": "Spec has Milestones",
+      "passed": true,
+      "evidence": "checked spec text for expected headings/keywords"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 3,
+    "total": 7,
+    "pass_rate": 0.5714285714285714
+  }
+}
