@@ -14,5 +14,11 @@
   "statusLine": {
     "type": "command",
     "command": "bash \"$(git rev-parse --show-toplevel)/.claude/statusline-command.sh\""
+  },
+  "worktree": {
+    "baseRef": "head",
+    "symlinkDirectories": [
+      "node_modules"
+    ]
   }
 }
