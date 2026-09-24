@@ -6,24 +6,32 @@
 <title>Find a Pizza Restaurant</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
+:root{--bg:#fbf8f3;--fg:#1f1b16;--muted:#6b635a;--card:#fff;--border:#e6dfd4;--link:#1f7a44;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--bg:#15130f;--fg:#f2ede5;--muted:#a79e92;--card:#1f1c17;--border:#37322a;--link:#5fd08f}}
 *{box-sizing:border-box}
-body{margin:0;background:#fbf8f3;color:#1f1b16;font:15px/1.45 system-ui,-apple-system,sans-serif}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,sans-serif}
 header{padding:16px}
 h1{margin:0 0 4px;font-size:1.4rem}
-header p{margin:0;color:#6b635a}
-#map{height:calc(100vh - 110px);min-height:420px;margin:0 16px 16px;border:1px solid #e6dfd4;border-radius:10px}
-.map-empty{margin:0 16px 16px;padding:24px;border:1px solid #e6dfd4;border-radius:10px;background:#fff;text-align:center}
+header p{margin:0;color:var(--muted)}
+#map{height:calc(100vh - 110px);height:calc(100dvh - 110px);min-height:320px;margin:0 16px 16px;border:1px solid var(--border);border-radius:10px}
+@media (max-width:480px){header{padding:12px}#map{margin:0 8px 8px}}
+.map-empty{margin:0 16px 16px;padding:24px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--fg);text-align:center}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--fg);border:1px solid var(--border)}
+.leaflet-popup-content{max-width:calc(100vw - 72px);overflow-wrap:anywhere}
+.leaflet-container a.leaflet-popup-close-button{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;width:44px;height:44px;font-size:22px;color:var(--muted)}
+.leaflet-popup-content a{display:inline-flex;align-items:center;min-width:44px;min-height:44px;color:var(--link)}
 .store-pin{display:flex;align-items:center;justify-content:center;background:none;border:0}
 .store-pin__dot{width:20px;height:20px;border-radius:50%;background:#1f8a4c;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)}
-.store-card{min-width:200px}
+.store-card{min-width:0;max-width:100%}
 .store-card__name{margin:0 0 4px;font-size:1.05rem}
-.store-card__address{margin:0 0 8px;color:#4a433b}
+.store-card__address{margin:0 0 8px;color:var(--muted)}
 .store-card__hours{list-style:none;margin:0 0 8px;padding:0}
 .store-card__hours li{display:flex;justify-content:space-between;gap:16px}
 .store-card__day{font-weight:600}
 .store-card__no-hours{margin:0 0 8px;font-style:italic}
 .store-card__phone{margin:0}
-.store-card__phone a{font-weight:600;color:#1f8a4c}
+.store-card__phone a{font-weight:600;color:var(--link)}
 </style>
 </head>
 <body>

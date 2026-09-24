@@ -11,6 +11,9 @@ const DAYS = [
   ["sun", "Sun"],
 ];
 
+/** Minimum tap-target size in CSS px (R7); app.js uses it for the pin icon. */
+export const TAP_TARGET_PX = 44;
+
 const NO_HOURS = "Hours not available, please call to check";
 
 /** Escapes `& < > " '` for safe use in HTML text and attribute values. */
