@@ -3,7 +3,7 @@ id: T-002
 title: Tapping a pin opens a store card with address, weekly hours and tap-to-call
 source: docs/specs/restaurant-location-map.md
 covers: [R4, R5, R6, US-07, US-08, US-10]
-status: todo
+status: done
 depends_on: [T-001]
 size: M
 ---
@@ -51,3 +51,6 @@ The v1 goal is to turn map visits into store visits and phone calls. The store c
 - Screen-reader semantics and keyboard opening of cards (T-008).
 - Open-now badge and today's-row highlight. The spec lists live open/closed status as out of scope (see Open questions).
 - Ghost-kitchen "Pickup & delivery only" label. It is not in the spec (see Open questions).
+
+## Notes
+- Round 1 CHANGES_REQUESTED only for the missing browser check. Round 2 APPROVED 2026-09-24 after a headless Chrome check with phone emulation. The "second pin replaces the first" check covered one pin pair only, because on a narrow screen the open card pans the map over the other pins.

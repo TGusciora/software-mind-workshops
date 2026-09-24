@@ -1,6 +1,7 @@
 // Customer map: loads stores.json, shows one pin per open store and fits the
 // initial view to them. Relies on the global `L` from Leaflet 1.9.4.
 import { openStores, initialView } from "./stores.js";
+import { renderCard } from "./card.js";
 
 const EMPTY_MESSAGE = "No restaurants are open yet, check back soon";
 
@@ -43,7 +44,9 @@ async function main() {
 
   const icon = storeIcon();
   for (const s of stores) {
-    L.marker([s.lat, s.lng], { icon, title: s.name }).addTo(map);
+    L.marker([s.lat, s.lng], { icon, title: s.name })
+      .bindPopup(renderCard(s))
+      .addTo(map);
   }
 
   // Padding keeps edge pins fully on screen (a pin is 44px wide).
