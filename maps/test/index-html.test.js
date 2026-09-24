@@ -33,6 +33,48 @@ test("index.html has no inline store array or inline script", () => {
   assert.doesNotMatch(HTML, /"lat"/);
 });
 
+// T-006: performance budget (R8) and loading indicator (US-12).
+const LEAFLET_JS = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+const LEAFLET_CSS = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+
+test("the only external <script src> is Leaflet 1.9.4 JS", () => {
+  const external = [...HTML.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/gi)]
+    .map((m) => m[1])
+    .filter((src) => /^(https?:)?\/\//i.test(src));
+  assert.deepEqual(external, [LEAFLET_JS]);
+});
+
+test("the only external stylesheet is Leaflet 1.9.4 CSS", () => {
+  const sheets = [...HTML.matchAll(/<link\b[^>]*>/gi)]
+    .map((m) => m[0])
+    .filter((tag) => /\brel="stylesheet"/i.test(tag))
+    .map((tag) => tag.match(/\bhref="([^"]+)"/i)[1]);
+  assert.deepEqual(sheets, [LEAFLET_CSS]);
+  assert.doesNotMatch(HTML, /@import/i);
+});
+
+test("no web-font URLs are referenced", () => {
+  assert.doesNotMatch(
+    HTML,
+    /fonts\.googleapis\.com|fonts\.gstatic\.com|typekit|@font-face|\.woff2?\b|\.ttf\b|\.otf\b/i,
+  );
+});
+
+test("stores.json is preloaded as fetch with crossorigin", () => {
+  assert.match(HTML, /<link\s+rel="preload"\s+href="stores\.json"\s+as="fetch"\s+crossorigin\s*>/);
+});
+
+test("the Leaflet CDN and tile hosts are preconnected", () => {
+  assert.match(HTML, /<link\s+rel="preconnect"\s+href="https:\/\/cdnjs\.cloudflare\.com"/);
+  assert.match(HTML, /<link\s+rel="preconnect"\s+href="https:\/\/tile\.openstreetmap\.org"/);
+});
+
+test("the map area shows a loading indicator that app.js removes", () => {
+  assert.match(HTML, /<div id="map"><p id="map-loading"[^>]*>Loading restaurants…<\/p><\/div>/);
+  const APP = readFileSync(new URL("../js/app.js", import.meta.url), "utf8");
+  assert.match(APP, /getElementById\("map-loading"\)\?\.remove\(\)/);
+});
+
 test("index.html has no planned, franchise or sample-data wording", () => {
   assert.doesNotMatch(HTML, /planned/i);
   assert.doesNotMatch(HTML, /franchise/i);

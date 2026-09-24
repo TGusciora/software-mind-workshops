@@ -3,7 +3,7 @@ id: T-006
 title: First map render under 3 s on a 4G phone, with a loading indicator
 source: docs/specs/restaurant-location-map.md
 covers: [R8, US-12]
-status: todo
+status: done
 depends_on: [T-001]
 size: S
 ---
@@ -36,3 +36,8 @@ A slow map on mobile data sends a hungry customer to a competitor. R8 targets fi
 ## Out of scope
 - Self-hosting Leaflet or switching tile providers.
 - CDN or hosting configuration (the hosting target is undecided, see Open questions).
+
+## Notes (coordinator, 2026-09-24)
+- Review APPROVED against base 6f46bb6. `npm test` 51/51.
+- Minor: tile URL uses {s}.tile.openstreetmap.org subdomains, so the tile.openstreetmap.org preconnect does not help tiles; consider dropping {s}.
+- Manual checks pending (human): Slow 4G loading indicator, Lighthouse <3 s numbers for the PR, stores.json parallel with Leaflet in Network panel.

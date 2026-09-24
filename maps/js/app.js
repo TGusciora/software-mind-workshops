@@ -58,7 +58,12 @@ function showLoadError(mapEl) {
 
 async function main() {
   const mapEl = document.getElementById("map");
+  // loadStores() uses fetch's default mode (cors, same-origin credentials),
+  // which matches <link rel="preload" as="fetch" crossorigin>, so the preload
+  // is reused.
   const result = await loadStores();
+  // T-006: drop the loading indicator; map, empty state or error replaces it.
+  document.getElementById("map-loading")?.remove();
   if (!result.ok) {
     showLoadError(mapEl);
     return;

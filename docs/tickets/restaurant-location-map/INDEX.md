@@ -11,7 +11,7 @@ Execution order: dependencies first, then the clearest revenue and customer impa
 | 3 | [T-003](T-003-mobile-360px-and-dark-theme.md) | Map and store card fit a 360px phone with 44px tap targets, in light and dark theme | R7 (US-13, US-15) | T-002 | S | done |
 | 4 | [T-004](T-004-get-directions-link.md) | Store card has a "Get directions" link that opens Google Maps | R10 (US-11) | T-002 | S | done |
 | 5 | [T-005](T-005-load-error-with-retry.md) | Show a readable error with "Try again" when stores.json fails to load | R11 (US-01) | T-001 | S | done |
-| 6 | [T-006](T-006-fast-first-render-and-loading-indicator.md) | First map render under 3 s on a 4G phone, with a loading indicator | R8 (US-12) | T-001 | S | todo |
+| 6 | [T-006](T-006-fast-first-render-and-loading-indicator.md) | First map render under 3 s on a 4G phone, with a loading indicator | R8 (US-12) | T-001 | S | done |
 | 7 | [T-007](T-007-store-count-above-map.md) | Show "N restaurants" above the map | R9 (US-06) | T-001 | S | todo |
 | 8 | [T-008](T-008-keyboard-and-screen-reader-access.md) | Pins are keyboard-focusable and the store card is readable by screen readers | R12 (US-14) | T-002 | M | todo |
 | 9 | [T-009](T-009-internal-prototype-reads-stores-json.md) | Internal prototype store-locations.html reads maps/stores.json | R1 | T-001 | S | blocked |
