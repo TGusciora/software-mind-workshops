@@ -1,6 +1,6 @@
 // Customer map: loads stores.json, shows one pin per open store and fits the
 // initial view to them. Relies on the global `L` from Leaflet 1.9.4.
-import { openStores, initialView, loadStores, countLabel } from "./stores.js";
+import { openStores, initialView, loadStores, countLabel, markerOptions } from "./stores.js";
 import { renderCard, TAP_TARGET_PX } from "./card.js";
 
 const EMPTY_MESSAGE = "No restaurants are open yet, check back soon";
@@ -96,10 +96,31 @@ function render(mapEl, data) {
 
   const icon = storeIcon();
   for (const s of stores) {
-    L.marker([s.lat, s.lng], { icon, title: s.name })
+    // Leaflet 1.9.4 markers with `keyboard: true` get tabindex=0 and already
+    // fire "click" on Enter (Marker._onKeyPress), which opens the bound popup,
+    // so no extra keydown handler is added (it would fire twice).
+    L.marker([s.lat, s.lng], { icon, ...markerOptions(s) })
       .bindPopup(renderCard(s), { maxWidth: Math.min(300, window.innerWidth - 48) })
       .addTo(map);
   }
+
+  // Esc closes the open card and returns focus to the pin that opened it
+  // (R12). Capture phase runs before Leaflet's own Esc handler, so we still
+  // know which marker owned the popup.
+  mapEl.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key !== "Escape") return;
+      const popup = map._popup;
+      if (!popup || !map.hasLayer(popup)) return;
+      const pinEl = popup._source?.getElement?.();
+      e.preventDefault();
+      e.stopPropagation();
+      map.closePopup();
+      pinEl?.focus();
+    },
+    true,
+  );
 
   // Padding keeps edge pins fully on screen (a pin is 44px wide).
   map.fitBounds(view.bounds, { maxZoom: view.maxZoom, padding: [24, 24] });

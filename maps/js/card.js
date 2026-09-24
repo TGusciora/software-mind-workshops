@@ -62,17 +62,17 @@ export function renderCard(store) {
   const parts = ['<div class="store-card">'];
   parts.push(`<h2 class="store-card__name">${escapeHtml(store.name)}</h2>`);
   if (store.address) {
-    parts.push(`<p class="store-card__address">${escapeHtml(store.address)}</p>`);
+    parts.push(`<address class="store-card__address">${escapeHtml(store.address)}</address>`);
   }
   const rows = hoursRows(store.hours);
   if (rows) {
-    parts.push('<ul class="store-card__hours">');
+    parts.push('<table class="store-card__hours"><caption class="visually-hidden">Opening hours</caption><tbody>');
     for (const r of rows) {
       parts.push(
-        `<li><span class="store-card__day">${r.day}</span> <span class="store-card__time">${escapeHtml(r.text)}</span></li>`,
+        `<tr><th scope="row" class="store-card__day">${r.day}</th><td class="store-card__time">${escapeHtml(r.text)}</td></tr>`,
       );
     }
-    parts.push("</ul>");
+    parts.push("</tbody></table>");
   } else {
     parts.push(`<p class="store-card__no-hours">${NO_HOURS}</p>`);
   }

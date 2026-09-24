@@ -3,7 +3,7 @@ id: T-008
 title: Pins are keyboard-focusable and the store card is readable by screen readers
 source: docs/specs/restaurant-location-map.md
 covers: [R12, US-14]
-status: todo
+status: done
 depends_on: [T-002]
 size: M
 ---
@@ -40,3 +40,8 @@ Customers who can't use a touchscreen or mouse still need to find a store and ca
 ## Out of scope
 - Announcing open-now status or ghost-kitchen type (not in the spec, see Open questions).
 - A full WCAG audit of third-party Leaflet controls.
+
+## Notes (coordinator, 2026-09-24)
+- Review APPROVED (code) against base 0cc6ac0. `npm test` 56/56.
+- Minor: Esc handler uses Leaflet private fields map._popup / popup._source (pinned 1.9.4); .visually-hidden lacks margin/padding/border/clip-path of the standard pattern; focus-ring 3:1 contrast unmeasured.
+- Manual keyboard (Tab/Enter/Esc) and VoiceOver checks pending (human).

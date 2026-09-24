@@ -38,7 +38,7 @@ test("renderCard for the sample store has name, address, ordered hours, phone li
   const html = renderCard(SAMPLE);
   assert.ok(html.includes("Austin – South Congress"));
   assert.ok(html.includes("1234 S Congress Ave, Austin, TX 78704"));
-  const rows = [...html.matchAll(/<span class="store-card__day">(\w+)<\/span> <span class="store-card__time">([^<]*)<\/span>/g)];
+  const rows = [...html.matchAll(/<th scope="row" class="store-card__day">(\w+)<\/th><td class="store-card__time">([^<]*)<\/td>/g)];
   assert.deepEqual(rows.map((m) => m[1]), ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
   assert.equal(rows[4][2], "11:00–23:00");
   assert.equal(rows[5][2], "11:00–23:00");
@@ -84,4 +84,21 @@ test("every open store in stores.json gets a directions link", () => {
     const href = escapeHtml(directionsUrl(store));
     assert.ok(html.includes(`href="${href}" target="_blank" rel="noopener">Get directions</a>`), store.name);
   }
+});
+
+test("renderCard uses semantic markup in order name -> address -> hours -> phone -> directions (R12)", () => {
+  const html = renderCard(SAMPLE);
+  const idx = (needle) => {
+    const i = html.indexOf(needle);
+    assert.ok(i >= 0, `missing ${needle}`);
+    return i;
+  };
+  const name = idx(`<h2 class="store-card__name">${SAMPLE.name}</h2>`);
+  const address = idx(`<address class="store-card__address">${SAMPLE.address}</address>`);
+  const hours = idx('<table class="store-card__hours">');
+  const hoursEnd = idx("</table>");
+  const phone = idx('href="tel:');
+  const directions = idx("Get directions");
+  assert.ok(name < address && address < hours && hoursEnd < phone && phone < directions);
+  assert.equal([...html.matchAll(/<th scope="row"/g)].length, 7);
 });

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { openStores, initialView, loadStores, countLabel } from "../js/stores.js";
+import { openStores, initialView, loadStores, countLabel, markerOptions } from "../js/stores.js";
 
 // Mirrors the prototype pipeline: 3 open, 9 planned, 3 franchise-test.
 const FIXTURE = [
@@ -156,4 +156,12 @@ test("countLabel pluralises restaurants", () => {
 
 test("count of open stores in the fixture is labelled 3 restaurants", () => {
   assert.equal(countLabel(openStores(FIXTURE).length), "3 restaurants");
+});
+
+test("markerOptions makes pins keyboard-focusable and named (R12)", () => {
+  assert.deepEqual(markerOptions({ name: "Austin – Mueller", lat: 30.298, lng: -97.705 }), {
+    keyboard: true,
+    title: "Austin – Mueller",
+    alt: "Austin – Mueller",
+  });
 });

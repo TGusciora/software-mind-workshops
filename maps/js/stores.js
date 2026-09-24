@@ -65,3 +65,8 @@ export async function loadStores(fetchFn = fetch, url = "stores.json") {
 export function countLabel(n) {
   return n === 1 ? "1 restaurant" : `${n} restaurants`;
 }
+
+/** Leaflet marker options for a store pin: keyboard-focusable and named (R12). */
+export function markerOptions(store) {
+  return { keyboard: true, title: store.name, alt: store.name };
+}
