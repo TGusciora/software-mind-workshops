@@ -1,6 +1,6 @@
 // Customer map: loads stores.json, shows one pin per open store and fits the
 // initial view to them. Relies on the global `L` from Leaflet 1.9.4.
-import { openStores, initialView } from "./stores.js";
+import { openStores, initialView, loadStores } from "./stores.js";
 import { renderCard, TAP_TARGET_PX } from "./card.js";
 
 const EMPTY_MESSAGE = "No restaurants are open yet, check back soon";
@@ -24,11 +24,50 @@ function storeIcon() {
   });
 }
 
+const ERROR_MESSAGE = "We couldn't load our restaurants. Please try again.";
+
+// Replaces the map with a readable error and a "Try again" button (R11, US-01).
+// The map element is only hidden, so a retry can render into it; the Leaflet
+// map is never created before a successful load, so it is initialised once.
+function showLoadError(mapEl) {
+  const box = document.createElement("div");
+  box.id = "map-error";
+  box.className = "map-error";
+  box.setAttribute("role", "alert");
+  const msg = document.createElement("p");
+  msg.textContent = ERROR_MESSAGE;
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "map-error__retry";
+  btn.textContent = "Try again";
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    const result = await loadStores();
+    if (!result.ok) {
+      btn.disabled = false;
+      return;
+    }
+    box.remove();
+    mapEl.hidden = false;
+    render(mapEl, result.stores);
+  });
+  box.append(msg, btn);
+  mapEl.hidden = true;
+  mapEl.before(box);
+}
+
 async function main() {
   const mapEl = document.getElementById("map");
-  const res = await fetch("stores.json");
-  if (!res.ok) throw new Error(`stores.json: HTTP ${res.status}`);
-  const stores = openStores(await res.json());
+  const result = await loadStores();
+  if (!result.ok) {
+    showLoadError(mapEl);
+    return;
+  }
+  render(mapEl, result.stores);
+}
+
+function render(mapEl, data) {
+  const stores = openStores(data);
   const view = initialView(stores);
 
   if (view.kind === "empty") {

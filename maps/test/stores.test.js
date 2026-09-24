@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { openStores, initialView } from "../js/stores.js";
+import { openStores, initialView, loadStores } from "../js/stores.js";
 
 // Mirrors the prototype pipeline: 3 open, 9 planned, 3 franchise-test.
 const FIXTURE = [
@@ -101,4 +101,49 @@ test("initialView for a single store returns that point with maxZoom 14", () => 
 test("initialView for zero stores returns { kind: 'empty' }", () => {
   assert.deepEqual(initialView([]), { kind: "empty" });
   assert.deepEqual(initialView(openStores([])), { kind: "empty" });
+});
+
+// Fake fetch helpers for loadStores (R11, US-01).
+const jsonResponse = (body, status = 200) => async () => ({
+  ok: status >= 200 && status < 300,
+  status,
+  json: async () => body,
+});
+
+test("loadStores returns { ok: false } when fetch rejects", async () => {
+  const fetchFn = async () => {
+    throw new TypeError("Failed to fetch");
+  };
+  assert.deepEqual(await loadStores(fetchFn), { ok: false });
+});
+
+test("loadStores returns { ok: false } for a 404", async () => {
+  assert.deepEqual(await loadStores(jsonResponse("Not found", 404)), { ok: false });
+});
+
+test("loadStores returns { ok: false } for a 500", async () => {
+  assert.deepEqual(await loadStores(jsonResponse([], 500)), { ok: false });
+});
+
+test("loadStores returns { ok: false } for a body that is not JSON", async () => {
+  const fetchFn = async () => ({
+    ok: true,
+    status: 200,
+    json: async () => JSON.parse("<html>oops</html>"),
+  });
+  assert.deepEqual(await loadStores(fetchFn), { ok: false });
+});
+
+test("loadStores returns { ok: false } for a JSON object that is not an array", async () => {
+  assert.deepEqual(await loadStores(jsonResponse({ stores: FIXTURE })), { ok: false });
+});
+
+test("loadStores returns { ok: true, stores } for a valid array", async () => {
+  let requested;
+  const fetchFn = async (url) => {
+    requested = url;
+    return jsonResponse(FIXTURE)();
+  };
+  assert.deepEqual(await loadStores(fetchFn), { ok: true, stores: FIXTURE });
+  assert.equal(requested, "stores.json");
 });

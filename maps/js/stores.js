@@ -43,3 +43,20 @@ export function initialView(stores) {
     maxZoom: INITIAL_MAX_ZOOM,
   };
 }
+
+/**
+ * Fetch and parse the store list. Never throws.
+ * Returns `{ ok: true, stores }` for a 2xx JSON array, otherwise `{ ok: false }`
+ * (network error, non-2xx status, invalid JSON, or a non-array body).
+ */
+export async function loadStores(fetchFn = fetch, url = "stores.json") {
+  try {
+    const res = await fetchFn(url);
+    if (!res || !res.ok) return { ok: false };
+    const stores = await res.json();
+    if (!Array.isArray(stores)) return { ok: false };
+    return { ok: true, stores };
+  } catch {
+    return { ok: false };
+  }
+}

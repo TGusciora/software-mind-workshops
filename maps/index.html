@@ -33,6 +33,12 @@ header p{margin:0;color:var(--muted)}
 .store-card__phone{margin:0}
 .store-card__phone a{font-weight:600;color:var(--link)}
 .card-directions{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--link)}
+/* T-005: load error with "Try again" */
+#map[hidden]{display:none}
+.map-error{margin:0 16px 16px;padding:24px;border:1px solid var(--border, #e6dfd4);border-radius:10px;background:var(--card, #fff);color:var(--fg, #1f1b16);text-align:center}
+.map-error p{margin:0 0 16px}
+.map-error__retry{min-width:44px;min-height:44px;padding:10px 20px;border:0;border-radius:8px;background:var(--link);color:var(--bg);font:inherit;font-weight:600;cursor:pointer}
+.map-error__retry:disabled{opacity:.6;cursor:progress}
 </style>
 </head>
 <body>
