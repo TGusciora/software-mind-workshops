@@ -41,6 +41,11 @@ export function formatPhone(phone) {
   return `(${m[1]}) ${m[2]}-${m[3]}`;
 }
 
+/** Google Maps directions URL to the store's address (no API key needed). */
+export function directionsUrl(store) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(store.address)}`;
+}
+
 /** Seven Mon->Sun rows `{ day, text }`, or `null` when `hours` is missing. */
 export function hoursRows(hours) {
   if (hours == null || typeof hours !== "object") return null;
@@ -74,6 +79,11 @@ export function renderCard(store) {
   if (typeof store.phone === "string" && /\d/.test(store.phone)) {
     parts.push(
       `<p class="store-card__phone"><a href="${escapeHtml(telHref(store.phone))}">${escapeHtml(formatPhone(store.phone))}</a></p>`,
+    );
+  }
+  if (store.address) {
+    parts.push(
+      `<p class="store-card__directions"><a class="card-directions" href="${escapeHtml(directionsUrl(store))}" target="_blank" rel="noopener">Get directions</a></p>`,
     );
   }
   parts.push("</div>");
