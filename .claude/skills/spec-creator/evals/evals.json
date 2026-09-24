@@ -1,0 +1,23 @@
+{
+  "skill_name": "spec-creator",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I want to build an online ordering site for our pizza restaurants in Texas.",
+      "expected_output": "Spec file with goals, scope, tech, requirements; questionnaire asked first",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Spec out a Slack bot that summarizes daily standups.",
+      "expected_output": "Spec file with goals, scope, tech, requirements; questionnaire asked first",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "an app for tracking my workouts.",
+      "expected_output": "Spec file with goals, scope, tech, requirements; questionnaire asked first",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "skill_name": "spec-creator",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-09-23T17:11:14Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571428571428571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 35.2,
+        "tokens": 35181,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Questionnaire of goals, scope and tech was produced",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Goals/vision section",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Scope with in/out of scope",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has numbered requirements with must/should/could priority",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Technology section with rationale",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec records assumptions and open questions",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Milestones",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571428571428571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 37.1,
+        "tokens": 35075,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Questionnaire of goals, scope and tech was produced",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Goals/vision section",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Scope with in/out of scope",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has numbered requirements with must/should/could priority",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Technology section with rationale",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec records assumptions and open questions",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Milestones",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571428571428571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 34.1,
+        "tokens": 34706,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Questionnaire of goals, scope and tech was produced",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Goals/vision section",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Scope with in/out of scope",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has numbered requirements with must/should/could priority",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Technology section with rationale",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec records assumptions and open questions",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Milestones",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5714285714285714,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 33.0,
+        "tokens": 33733,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Questionnaire of goals, scope and tech was produced",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Goals/vision section",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Scope with in/out of scope",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has numbered requirements with must/should/could priority",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Technology section with rationale",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec records assumptions and open questions",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Milestones",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5714285714285714,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 28.4,
+        "tokens": 32852,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Questionnaire of goals, scope and tech was produced",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Goals/vision section",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Scope with in/out of scope",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has numbered requirements with must/should/could priority",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Technology section with rationale",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec records assumptions and open questions",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Milestones",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5714285714285714,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 26.0,
+        "tokens": 32725,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Questionnaire of goals, scope and tech was produced",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Goals/vision section",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Scope with in/out of scope",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has numbered requirements with must/should/could priority",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Technology section with rationale",
+          "passed": false,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec records assumptions and open questions",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        },
+        {
+          "text": "Spec has Milestones",
+          "passed": true,
+          "evidence": "checked spec text for expected headings/keywords"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.8571,
+        "stddev": 0.0,
+        "min": 0.8571,
+        "max": 0.8571
+      },
+      "time_seconds": {
+        "mean": 35.4667,
+        "stddev": 1.5177,
+        "min": 34.1,
+        "max": 37.1
+      },
+      "tokens": {
+        "mean": 34987.3333,
+        "stddev": 249.3398,
+        "min": 34706,
+        "max": 35181
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.5714,
+        "stddev": 0.0,
+        "min": 0.5714,
+        "max": 0.5714
+      },
+      "time_seconds": {
+        "mean": 29.1333,
+        "stddev": 3.5572,
+        "min": 26.0,
+        "max": 33.0
+      },
+      "tokens": {
+        "mean": 33103.3333,
+        "stddev": 548.9921,
+        "min": 32725,
+        "max": 33733
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.29",
+      "time_seconds": "+6.3",
+      "tokens": "+1884"
+    }
+  },
+  "notes": []
+}

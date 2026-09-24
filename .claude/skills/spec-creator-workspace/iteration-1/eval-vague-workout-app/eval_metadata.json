@@ -1,0 +1,14 @@
+{
+  "eval_id": 2,
+  "eval_name": "vague-workout-app",
+  "prompt": "an app for tracking my workouts.",
+  "assertions": [
+    "Questionnaire of goals, scope and tech was produced",
+    "Spec has Goals/vision section",
+    "Spec has Scope with in/out of scope",
+    "Spec has numbered requirements with must/should/could priority",
+    "Spec has Technology section with rationale",
+    "Spec records assumptions and open questions",
+    "Spec has Milestones"
+  ]
+}
