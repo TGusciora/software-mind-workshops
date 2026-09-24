@@ -1,6 +1,6 @@
 // Customer map: loads stores.json, shows one pin per open store and fits the
 // initial view to them. Relies on the global `L` from Leaflet 1.9.4.
-import { openStores, initialView, loadStores } from "./stores.js";
+import { openStores, initialView, loadStores, countLabel } from "./stores.js";
 import { renderCard, TAP_TARGET_PX } from "./card.js";
 
 const EMPTY_MESSAGE = "No restaurants are open yet, check back soon";
@@ -75,9 +75,17 @@ function render(mapEl, data) {
   const stores = openStores(data);
   const view = initialView(stores);
 
+  // T-007: count comes from the same filtered array as the markers; it stays
+  // hidden in the loading, empty and error states.
+  const countEl = document.getElementById("store-count");
   if (view.kind === "empty") {
+    if (countEl) countEl.hidden = true;
     showEmpty(mapEl);
     return;
+  }
+  if (countEl) {
+    countEl.textContent = countLabel(stores.length);
+    countEl.hidden = false;
   }
 
   const map = L.map(mapEl, { scrollWheelZoom: true });

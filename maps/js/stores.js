@@ -60,3 +60,8 @@ export async function loadStores(fetchFn = fetch, url = "stores.json") {
     return { ok: false };
   }
 }
+
+/** Label for the count above the map: "1 restaurant", otherwise "N restaurants". */
+export function countLabel(n) {
+  return n === 1 ? "1 restaurant" : `${n} restaurants`;
+}

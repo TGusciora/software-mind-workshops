@@ -3,7 +3,7 @@ id: T-007
 title: Show "N restaurants" above the map
 source: docs/specs/restaurant-location-map.md
 covers: [R9, US-06]
-status: todo
+status: done
 depends_on: [T-001]
 size: S
 ---
@@ -30,3 +30,8 @@ A count such as "3 restaurants" tells the customer how many options they have be
 ## Out of scope
 - Counts per status or per city.
 - A list view of stores.
+
+## Notes (coordinator, 2026-09-24)
+- Review APPROVED against base 0584557. `npm test` 54/54.
+- Minor: #map height calc(100dvh - 110px) does not allow for the ~30px count line; short screens may scroll slightly vertically (suggest 140px).
+- Manual browser checks pending (human).

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { openStores, initialView, loadStores } from "../js/stores.js";
+import { openStores, initialView, loadStores, countLabel } from "../js/stores.js";
 
 // Mirrors the prototype pipeline: 3 open, 9 planned, 3 franchise-test.
 const FIXTURE = [
@@ -146,4 +146,14 @@ test("loadStores returns { ok: true, stores } for a valid array", async () => {
   };
   assert.deepEqual(await loadStores(fetchFn), { ok: true, stores: FIXTURE });
   assert.equal(requested, "stores.json");
+});
+
+test("countLabel pluralises restaurants", () => {
+  assert.equal(countLabel(3), "3 restaurants");
+  assert.equal(countLabel(1), "1 restaurant");
+  assert.equal(countLabel(0), "0 restaurants");
+});
+
+test("count of open stores in the fixture is labelled 3 restaurants", () => {
+  assert.equal(countLabel(openStores(FIXTURE).length), "3 restaurants");
 });

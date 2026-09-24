@@ -80,3 +80,9 @@ test("index.html has no planned, franchise or sample-data wording", () => {
   assert.doesNotMatch(HTML, /franchise/i);
   assert.doesNotMatch(HTML, /sample data/i);
 });
+
+test("index.html has a hidden store count element above #map", () => {
+  const count = HTML.search(/<p\s+id="store-count"[^>]*\bhidden\b/);
+  assert.ok(count !== -1, "hidden #store-count element");
+  assert.ok(count < HTML.indexOf('<div id="map"'), "count precedes #map");
+});
