@@ -3,7 +3,7 @@ id: T-004
 title: Store card has a "Get directions" link that opens Google Maps
 source: docs/specs/restaurant-location-map.md
 covers: [R10, US-11]
-status: todo
+status: done
 depends_on: [T-002]
 size: S
 ---
@@ -32,3 +32,8 @@ Directions requests are the spec's chosen success metric. A one-tap route to the
 ## Out of scope
 - An analytics or click-tracking event. The spec puts analytics out of scope and schedules it for v1.1 (see Open questions).
 - Choosing Apple Maps vs Google Maps per device.
+
+## Notes (coordinator, 2026-09-24)
+- Code in commit 60b61b0. Review APPROVED against base 1732421. `npm test` passes (45/45).
+- Minor: .card-directions could share styling with the phone link.
+- Manual browser checks still pending (human).

@@ -3,7 +3,7 @@ id: T-005
 title: Show a readable error with "Try again" when stores.json fails to load
 source: docs/specs/restaurant-location-map.md
 covers: [R11, US-01]
-status: todo
+status: done
 depends_on: [T-001]
 size: S
 ---
@@ -36,3 +36,8 @@ A blank map is a dead end, and the customer leaves. R11 says a failed data load 
 ## Out of scope
 - Handling failures of map tiles or the Leaflet CDN, or partial data. The stories list this as out of scope for v1.
 - Automatic retries or backoff.
+
+## Notes (coordinator, 2026-09-24)
+- Code in commit 53dde13. Review APPROVED against base 60b61b0. `npm test` passes (45/45).
+- Minor: if render() throws after a successful retry, the button stays disabled; inconsistent CSS var fallbacks.
+- Manual browser checks still pending (human).

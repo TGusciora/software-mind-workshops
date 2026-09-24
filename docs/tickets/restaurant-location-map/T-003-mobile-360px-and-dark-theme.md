@@ -3,7 +3,7 @@ id: T-003
 title: Map and store card fit a 360px phone with 44px tap targets, in light and dark theme
 source: docs/specs/restaurant-location-map.md
 covers: [R7, US-13, US-15]
-status: todo
+status: done
 depends_on: [T-002]
 size: S
 ---
@@ -38,3 +38,8 @@ Most customers open the map on a phone while on the move. R7 is a must: no horiz
 - Dark map tiles. OSM tiles stay as they are, and only the page chrome and card are themed.
 - A manual theme toggle button.
 - Keyboard focus styling (T-008).
+
+## Notes (coordinator, 2026-09-24)
+- Code in commit 1732421. Review APPROVED against base a40b4da. `npm test` passes (45/45).
+- Minor: overflow-x:hidden may mask overflow; long store name may run under the 44px close button; popup maxWidth not recomputed on rotate.
+- Manual browser checks still pending (human).
