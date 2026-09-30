@@ -6,9 +6,7 @@
 [[.claude/agents/executor]]
 [[.claude/agents/planner]]
 [[.claude/agents/reviewer]]
-[[.claude/memory/sessions/2026-09-29_19-30-39_d9f00ff2]]
 [[.claude/memory/template]]
-[[.claude/memory/timeline]]
 [[.claude/rules/pineapple]]
 [[.claude/skills/spec-creator/SKILL]]
 [[.claude/skills/user-story-creator/SKILL]]
@@ -91,3 +89,9 @@
 [[.claude/skills/user-story-creator-workspace/iteration-1/eval-vague-feedback/with_skill/run-1/outputs/questionnaire]]
 [[.claude/skills/user-story-creator-workspace/iteration-1/eval-vague-feedback/without_skill/run-1/outputs/customer-feedback-user-stories]]
 [[.claude/skills/user-story-creator-workspace/iteration-1/eval-vague-feedback/without_skill/run-1/outputs/questionnaire]]
+
+## Other
+
+[[20260930_SM_ClaudeCode_Workshop8]]
+[[inventory-mcp/README]]
+[[orders-mcp/README]]
