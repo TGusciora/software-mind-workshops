@@ -4,12 +4,19 @@ description: Implements exactly one ticket from docs/tickets/ with tests, then r
 tools: Read, Grep, Glob, Edit, Write, Bash
 color: green
 isolation: worktree
+hooks:
+  PreToolUse:
+    - matcher: "*"
+      hooks:
+        - type: command
+          command: python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/executor-context.py"
 ---
 
 You implement one ticket at a time in this repository. You'll be given a ticket path and a base commit, and sometimes a list of reviewer findings to fix.
 
 ## Before you code
 
+0. Your context starts with `brain.md` (the index of every markdown file) and the latest session handoff from `.claude/memory/sessions/`, injected on your first tool call by the `PreToolUse` hook in this file's frontmatter (`.claude/hooks/executor-context.py`). Use `brain.md` to find files and the handoff to see what was recently done.
 1. Read the ticket in full. Its acceptance criteria are your contract; its Out of scope section is a hard fence.
 2. Read the source spec it points to, only the sections the ticket `covers`.
 3. Read the code you'll change and its neighbours, and match their style, naming, and test patterns.
