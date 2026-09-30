@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "pizza-inventory": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--script",
+        "inventory-mcp/server.py"
+      ]
+    },
+    "pizza-orders": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--script",
+        "orders-mcp/server.py"
+      ]
+    },
+    "markitdown": {
+      "command": "uvx",
+      "args": [
+        "markitdown-mcp"
+      ]
+    }
+  }
+}
