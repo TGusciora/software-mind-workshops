@@ -1,0 +1,623 @@
+{
+  "items": {
+    "al pastor pork": {
+      "on_hand": 70.0,
+      "unit": "oz",
+      "reorder_point": 10.5,
+      "aliases": []
+    },
+    "applewood-smoked bacon": {
+      "on_hand": 20.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "baby arugula": {
+      "on_hand": 15.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "bacon": {
+      "on_hand": 62.5,
+      "unit": "oz",
+      "reorder_point": 7.5,
+      "aliases": []
+    },
+    "bbq sauce drizzle": {
+      "on_hand": 1.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "bell peppers": {
+      "on_hand": 3.0,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "black olives": {
+      "on_hand": 25.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "blue cheese crumbles": {
+      "on_hand": 25.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "box & packaging": {
+      "on_hand": 150,
+      "unit": "each",
+      "reorder_point": 75.0,
+      "aliases": []
+    },
+    "breakfast sausage": {
+      "on_hand": 75.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "buffalo sauce": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "cajun seasoning": {
+      "on_hand": 0.2,
+      "unit": "oz",
+      "reorder_point": 0.8,
+      "aliases": []
+    },
+    "caramel sauce": {
+      "on_hand": 20.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "caraway seeds + chopped parsley": {
+      "on_hand": 15,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "celery": {
+      "on_hand": 0.5,
+      "unit": "oz",
+      "reorder_point": 1.5,
+      "aliases": []
+    },
+    "cheddar": {
+      "on_hand": 2.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "chipotle crema base": {
+      "on_hand": 60.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "cilantro": {
+      "on_hand": 20,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "cilantro + lime": {
+      "on_hand": 2,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "cilantro + lime zest": {
+      "on_hand": 20,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "cinnamon-butter": {
+      "on_hand": 3.0,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "cotija": {
+      "on_hand": 50.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": [
+        "cotija cheese"
+      ]
+    },
+    "cracked black pepper + green onion": {
+      "on_hand": 20,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "cream cheese": {
+      "on_hand": 2.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "cremini mushrooms": {
+      "on_hand": 50.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "crispy chicken-fried steak": {
+      "on_hand": 60.0,
+      "unit": "oz",
+      "reorder_point": 12.0,
+      "aliases": []
+    },
+    "crispy fried chicken": {
+      "on_hand": 60.0,
+      "unit": "oz",
+      "reorder_point": 12.0,
+      "aliases": []
+    },
+    "crunchy coleslaw": {
+      "on_hand": 40.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "cup-and-char pepperoni": {
+      "on_hand": 162.5,
+      "unit": "oz",
+      "reorder_point": 19.5,
+      "aliases": []
+    },
+    "eggs": {
+      "on_hand": 50.0,
+      "unit": "each",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "fire-roasted corn": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "fresh jalape\u00f1o": {
+      "on_hand": 2.5,
+      "unit": "oz",
+      "reorder_point": 7.5,
+      "aliases": [
+        "jalape\u00f1o",
+        "jalapeno"
+      ]
+    },
+    "garlic cream cheese spread": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "garlic-butter sauce": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "green + red bell pepper": {
+      "on_hand": 30.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "green bell pepper": {
+      "on_hand": 1.5,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "green onion": {
+      "on_hand": 20,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "grilled chicken": {
+      "on_hand": 3.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "guajillo adobo sauce": {
+      "on_hand": 75.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "gulf shrimp": {
+      "on_hand": 100.0,
+      "unit": "oz",
+      "reorder_point": 15.0,
+      "aliases": []
+    },
+    "hot honey drizzle": {
+      "on_hand": 15.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "italian sausage": {
+      "on_hand": 40.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "lemon wedge + parsley": {
+      "on_hand": 20,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "lime crema": {
+      "on_hand": 37.5,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "lime zest + cilantro": {
+      "on_hand": 15,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "mascarpone": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "mexican chorizo": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "monterey jack": {
+      "on_hand": 125.0,
+      "unit": "oz",
+      "reorder_point": 15.0,
+      "aliases": []
+    },
+    "monterey jack + mozzarella blend": {
+      "on_hand": 350.0,
+      "unit": "oz",
+      "reorder_point": 42.0,
+      "aliases": []
+    },
+    "mozzarella + cotija blend": {
+      "on_hand": 105.0,
+      "unit": "oz",
+      "reorder_point": 21.0,
+      "aliases": []
+    },
+    "mustard-cream base": {
+      "on_hand": 75.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "oaxaca + mozzarella blend": {
+      "on_hand": 105.0,
+      "unit": "oz",
+      "reorder_point": 21.0,
+      "aliases": []
+    },
+    "oaxaca cheese": {
+      "on_hand": 90.0,
+      "unit": "oz",
+      "reorder_point": 18.0,
+      "aliases": []
+    },
+    "olive oil": {
+      "on_hand": 15,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "olive oil + roasted garlic base": {
+      "on_hand": 37.5,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "parmesan": {
+      "on_hand": 7.5,
+      "unit": "oz",
+      "reorder_point": 1.5,
+      "aliases": []
+    },
+    "peppered cream gravy": {
+      "on_hand": 75.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "pickled jalape\u00f1o": {
+      "on_hand": 15.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "pickled jalape\u00f1o + cilantro": {
+      "on_hand": 25,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "pickled red onion": {
+      "on_hand": 20.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "pickled red onion + cilantro": {
+      "on_hand": 2,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "pico de gallo": {
+      "on_hand": 30.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "pico de gallo + cilantro + hot sauce": {
+      "on_hand": 1,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "pineapple chunks": {
+      "on_hand": 300,
+      "unit": "oz",
+      "reorder_point": 154.5,
+      "aliases": [
+        "pineapple"
+      ]
+    },
+    "pizza dough ball": {
+      "on_hand": 1200,
+      "unit": "oz",
+      "reorder_point": 888.0,
+      "aliases": []
+    },
+    "pizza sauce": {
+      "on_hand": 360.0,
+      "unit": "oz",
+      "reorder_point": 72.0,
+      "aliases": [
+        "tomato sauce"
+      ]
+    },
+    "potato": {
+      "on_hand": 30.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "powdered sugar": {
+      "on_hand": 25,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "prosciutto": {
+      "on_hand": 50.0,
+      "unit": "oz",
+      "reorder_point": 7.5,
+      "aliases": []
+    },
+    "queso fresco": {
+      "on_hand": 15.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "ranch sauce": {
+      "on_hand": 60.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "ranchero sauce": {
+      "on_hand": 75.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "red onion": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "roasted green chiles": {
+      "on_hand": 37.5,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "roasted hatch green chile": {
+      "on_hand": 50.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "roasted poblano": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "salsa verde": {
+      "on_hand": 60.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "sauerkraut": {
+      "on_hand": 40.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "sausage gravy": {
+      "on_hand": 75.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "seasoned ground beef": {
+      "on_hand": 30.0,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "sharp cheddar": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "sharp cheddar + monterey jack blend": {
+      "on_hand": 120.0,
+      "unit": "oz",
+      "reorder_point": 18.0,
+      "aliases": []
+    },
+    "shredded roasted chicken": {
+      "on_hand": 6.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "skirt steak": {
+      "on_hand": 60.0,
+      "unit": "oz",
+      "reorder_point": 12.0,
+      "aliases": []
+    },
+    "smoked bacon": {
+      "on_hand": 15.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "smoked beef sausage": {
+      "on_hand": 70.0,
+      "unit": "oz",
+      "reorder_point": 10.5,
+      "aliases": []
+    },
+    "smoked brisket": {
+      "on_hand": 60.0,
+      "unit": "oz",
+      "reorder_point": 12.0,
+      "aliases": []
+    },
+    "smoked czech sausage": {
+      "on_hand": 80.0,
+      "unit": "oz",
+      "reorder_point": 12.0,
+      "aliases": []
+    },
+    "smoked ham": {
+      "on_hand": 100.0,
+      "unit": "oz",
+      "reorder_point": 12.0,
+      "aliases": []
+    },
+    "smoked pulled pork": {
+      "on_hand": 100.0,
+      "unit": "oz",
+      "reorder_point": 12.0,
+      "aliases": []
+    },
+    "sour cream + cilantro": {
+      "on_hand": 15.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "sweet corn kernels": {
+      "on_hand": 40.0,
+      "unit": "oz",
+      "reorder_point": 6.0,
+      "aliases": []
+    },
+    "swiss / low-moisture mozzarella blend": {
+      "on_hand": 12.0,
+      "unit": "oz",
+      "reorder_point": 18.0,
+      "aliases": []
+    },
+    "taj\u00edn + lime + cilantro": {
+      "on_hand": 15,
+      "unit": "oz",
+      "reorder_point": 3,
+      "aliases": []
+    },
+    "texas hot honey": {
+      "on_hand": 10.0,
+      "unit": "oz",
+      "reorder_point": 1.5,
+      "aliases": []
+    },
+    "texas pecans": {
+      "on_hand": 30.0,
+      "unit": "oz",
+      "reorder_point": 4.5,
+      "aliases": []
+    },
+    "texas-style bbq sauce": {
+      "on_hand": 75.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "vinegar-tangy bbq sauce": {
+      "on_hand": 45.0,
+      "unit": "oz",
+      "reorder_point": 9.0,
+      "aliases": []
+    },
+    "white onion": {
+      "on_hand": 20.0,
+      "unit": "oz",
+      "reorder_point": 3.0,
+      "aliases": []
+    },
+    "white queso sauce": {
+      "on_hand": 120.0,
+      "unit": "oz",
+      "reorder_point": 18.0,
+      "aliases": [
+        "white queso base"
+      ]
+    },
+    "whole-milk low-moisture mozzarella": {
+      "on_hand": 1515.0,
+      "unit": "oz",
+      "reorder_point": 303.0,
+      "aliases": [
+        "mozzarella"
+      ]
+    }
+  }
+}
