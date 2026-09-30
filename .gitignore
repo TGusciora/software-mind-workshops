@@ -3,3 +3,5 @@
 *.swp
 .DS_Store
 .claude/worktrees/
+.claude/memory/sessions/
+.claude/memory/timeline.md

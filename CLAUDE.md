@@ -9,5 +9,6 @@ This repository supports one goal: **become the dominant pizza restaurant busine
 Every decision, recipe, and piece of work here should move us toward that number. When choosing between options, prefer the one with the clearer impact on revenue.
 
 ## Repository layout
+- `brain.md` — index of every markdown file, grouped by structure, architecture, business plans and recipes. Start here to find a file.
 - `recipes/` — all pizza recipes. Look here before creating or changing any recipe.
 - `.claude/rules/` — rules Claude must follow when working in this repo. Read the relevant rules before starting a task.
