@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks commits unless the single check passes. Enable once per clone:
+#   git config core.hooksPath .githooks
+exec sh "$(git rev-parse --show-toplevel)/scripts/check.sh"
