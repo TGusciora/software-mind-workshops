@@ -21,6 +21,7 @@ It's registered in `.mcp.json` as `pizza-orders` and runs with `uv run --script 
 | `check_cancellation(order_id)` | Whether the order can be cancelled, why, and the refund (changes nothing) |
 | `cancel_order(order_id, reason)` | Cancels the order, subject to the rule above |
 | `order_board()` | Active orders grouped by status (kitchen/dispatch view) |
+| `sales_summary()` | Revenue, order count and average order (cancelled orders excluded) and progress toward the $3M goal |
 
 ## Resources
 `orders://statuses`, `menu://pizzas`, `orders://active`, `orders://{order_id}`

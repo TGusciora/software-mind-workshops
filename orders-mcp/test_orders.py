@@ -77,3 +77,22 @@ def test_board_groups_active_orders():
     od.set_status(a)
     b = od.board()
     assert b["counts"]["received"] == 1 and b["counts"]["preparing"] == 1
+
+
+def test_sales_summary_counts_revenue_and_skips_cancelled():
+    place()
+    place(items=[{"pizza": "cheese", "quantity": 1}])
+    gone = place()["order_id"]
+    od.cancel_order(gone, "changed mind")
+    s = od.sales_summary()
+    assert s["orders"] == 2
+    assert s["cancelled_orders"] == 1
+    assert s["revenue"] == 36.0 + od.load_menu()["cheese-pizza"]
+    assert s["average_order"] == round(s["revenue"] / 2, 2)
+    assert s["remaining_to_goal"] == od.SALES_GOAL - s["revenue"]
+
+
+def test_sales_summary_with_no_orders():
+    s = od.sales_summary()
+    assert (s["orders"], s["revenue"], s["average_order"]) == (0, 0, 0.0)
+    assert s["goal_progress_pct"] == 0 and s["remaining_to_goal"] == od.SALES_GOAL

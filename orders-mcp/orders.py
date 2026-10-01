@@ -21,6 +21,10 @@ CANCELLED = "cancelled"
 # Minutes each status usually lasts; used for the ETA.
 STAGE_MINUTES = {"received": 3, "preparing": 7, "in_oven": 8, "ready": 5, "out_for_delivery": 20}
 
+# The repo's vision (CLAUDE.md): sell $3M of pizza by this date.
+SALES_GOAL = 3_000_000
+SALES_GOAL_DATE = "2027-09-11"
+
 # Cancellation is allowed only before the pizza goes in the oven.
 CANCELLABLE = {"received", "preparing"}
 
@@ -258,6 +262,26 @@ def _summary(o: dict) -> dict:
     return {k: o[k] for k in ("order_id", "customer_name", "fulfillment", "status",
                               "progress", "eta", "total", "updated_at")} | {
         "pizzas": ", ".join(f"{i['quantity']}x {i['pizza']}" for i in o["items"])}
+
+
+def sales_summary() -> dict:
+    """Revenue from every order that wasn't cancelled, against the $3M goal in CLAUDE.md."""
+    with connect() as conn:
+        row = conn.execute(
+            "SELECT COUNT(*) AS n, COALESCE(SUM(total), 0) AS revenue FROM orders WHERE status != ?",
+            (CANCELLED,)).fetchone()
+        cancelled = conn.execute("SELECT COUNT(*) FROM orders WHERE status = ?", (CANCELLED,)).fetchone()[0]
+    revenue = round(row["revenue"], 2)
+    return {
+        "orders": row["n"],
+        "cancelled_orders": cancelled,
+        "revenue": revenue,
+        "average_order": round(revenue / row["n"], 2) if row["n"] else 0.0,
+        "goal": SALES_GOAL,
+        "goal_date": SALES_GOAL_DATE,
+        "goal_progress_pct": round(revenue / SALES_GOAL * 100, 4),
+        "remaining_to_goal": round(max(SALES_GOAL - revenue, 0), 2),
+    }
 
 
 def board() -> dict:

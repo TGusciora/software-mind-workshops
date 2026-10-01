@@ -82,6 +82,12 @@ def order_board() -> dict:
     return od.board()
 
 
+@mcp.tool()
+def sales_summary() -> dict:
+    """Revenue, order count and average order (cancelled orders excluded) and progress toward the $3M goal."""
+    return od.sales_summary()
+
+
 # ---------- resources ----------
 
 @mcp.resource("orders://statuses", mime_type="application/json")
