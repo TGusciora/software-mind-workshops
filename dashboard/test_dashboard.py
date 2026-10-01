@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import threading
 import urllib.error
 import urllib.request
@@ -57,6 +58,25 @@ def test_missing_db_returns_error_and_creates_nothing(db, server):
     status, body = get(server, "/api/summary")
     assert status == 500 and "error" in json.loads(body)
     assert not db.exists()
+
+
+@pytest.mark.skipif(os.geteuid() == 0, reason="root can read any file")
+def test_unreadable_db_returns_readable_error(db, server):
+    seed()
+    db.chmod(0o000)
+    try:
+        status, body = get(server, "/api/summary")
+    finally:
+        db.chmod(0o600)
+    payload = json.loads(body)
+    assert status == 500 and "not readable" in payload["error"]
+    assert "Traceback" not in body.decode()
+
+
+def test_server_socket_is_bound_to_loopback_and_needs_no_credentials(server):
+    assert server.server_address[0] == "127.0.0.1"
+    status, _ = get(server, "/")  # no auth header sent
+    assert status == 200
 
 
 def test_page_has_timestamp_and_error_banner(server):
