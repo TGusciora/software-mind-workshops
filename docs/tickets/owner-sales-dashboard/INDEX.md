@@ -9,7 +9,7 @@ Execution order: revenue-critical path first (R1, R2, R3, R7 in T-001 to T-003),
 | Order | ID | Title | Covers | Depends on | Size | Status |
 |---|---|---|---|---|---|---|
 | 1 | [T-001](T-001-dashboard-page-sales-totals-and-error-state.md) | Dashboard page shows sales totals, data timestamp and error state | R1, R7 | none | M | done |
-| 2 | [T-002](T-002-goal-progress-and-daily-pace.md) | Progress toward $3M and required vs actual daily pace | R2 | T-001 | S | todo |
+| 2 | [T-002](T-002-goal-progress-and-daily-pace.md) | Progress toward $3M and required vs actual daily pace | R2 | T-001 | S | done |
 | 3 | [T-003](T-003-active-order-board.md) | Active orders grouped by status | R3 | T-001 | S | todo |
 | 4 | [T-004](T-004-top-five-pizzas.md) | Top 5 pizzas by units and revenue | R4, R10 | T-001 | S | todo |
 | 5 | [T-005](T-005-low-stock-panel.md) | OUT/LOW inventory items and affected pizzas | R5 | T-001 | M | todo |

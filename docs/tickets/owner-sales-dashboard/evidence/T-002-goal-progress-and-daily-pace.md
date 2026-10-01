@@ -1,0 +1,8 @@
+AC-1: Progress percentage equals `sales_summary()["goal_progress_pct"]`.
+  EVIDENCE: dashboard/data.py:34 passes summary["goal_progress_pct"] through unchanged (no recompute); test_api_pace_progress_equals_sales_summary asserts /api/summary pace.goal_progress_pct == orders.sales_summary()["goal_progress_pct"]; page renders it in #goalbar/#goalpct (dashboard/static/index.html:7-8). `sh scripts/check.sh` -> pytest ./dashboard: 17 passed.
+AC-2: Required daily pace = remaining_to_goal / days left to 2027-09-11; actual daily pace shown beside it.
+  EVIDENCE: dashboard/data.py:26-31 (required = remaining_to_goal / max(days_left, 1); actual = revenue / days since first non-cancelled order, min 1); test_pace_normal_behind_and_ahead (2,000,000 remaining / 100 days = 20000.0; actual 100000.0), test_api_pace_progress_equals_sales_summary, test_first_order_date_ignores_cancelled_and_empty; shown side by side at dashboard/static/index.html:9 ("Required $X/day vs actual $Y/day"). pytest ./dashboard: 17 passed.
+AC-3: Clear "Ahead" or "Behind" label.
+  EVIDENCE: dashboard/data.py:39 label is "Ahead" or "Behind"; rendered in <strong id="pacelabel"> at dashboard/static/index.html:9; test_pace_normal_behind_and_ahead, test_pace_goal_met_is_ahead and test_page_has_goal_bar_pace_line_and_label pass (17 passed).
+AC-4: Empty DB and date-past-goal cases render without error.
+  EVIDENCE: test_pace_empty_db_is_zero_and_behind and test_api_empty_db_renders_pace_without_error (HTTP 200, actual 0.0, Behind); test_pace_on_or_after_goal_date_clamps_days_and_does_not_divide_by_zero[2027-09-11 and 2027-12-01] (days_left 0, no ZeroDivisionError). pytest ./dashboard: 17 passed.

@@ -3,6 +3,11 @@
 <body>
 <h1>Sales</h1>
 <div id="error" role="alert" style="display:none;background:#fdd;color:#900;padding:8px"></div>
+<section id="goal" style="display:none">
+  <progress id="goalbar" max="100" value="0" style="width:100%"></progress>
+  <p><strong id="goalpct"></strong> of $3M goal, <span id="daysleft"></span> days left</p>
+  <p>Required <span id="required"></span>/day vs actual <span id="actual"></span>/day: <strong id="pacelabel"></strong></p>
+</section>
 <dl id="stats" style="display:none">
   <dt>Revenue</dt><dd id="revenue"></dd>
   <dt>Orders</dt><dd id="orders"></dd>
@@ -17,7 +22,13 @@ fetch("/api/summary").then(r => r.json()).then(d => {
   if (d.error) throw new Error(d.error);
   set("revenue", money(d.revenue)); set("orders", d.orders);
   set("average", money(d.average_order)); set("cancelled", d.cancelled_orders);
+  const p = d.pace;
+  document.getElementById("goalbar").value = Math.min(p.goal_progress_pct, 100);
+  set("goalpct", p.goal_progress_pct + "%"); set("daysleft", p.days_left);
+  set("required", money(p.required_daily_pace)); set("actual", money(p.actual_daily_pace));
+  set("pacelabel", p.label);
   set("asof", "Data as of " + d.generated_at);
+  document.getElementById("goal").style.display = "";
   document.getElementById("stats").style.display = "";
 }).catch(e => {
   const el = document.getElementById("error");
