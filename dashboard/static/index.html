@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Owner dashboard</title></head>
+<body>
+<h1>Sales</h1>
+<div id="error" role="alert" style="display:none;background:#fdd;color:#900;padding:8px"></div>
+<dl id="stats" style="display:none">
+  <dt>Revenue</dt><dd id="revenue"></dd>
+  <dt>Orders</dt><dd id="orders"></dd>
+  <dt>Average order</dt><dd id="average"></dd>
+  <dt>Cancelled</dt><dd id="cancelled"></dd>
+</dl>
+<p id="asof"></p>
+<script>
+const money = n => "$" + Number(n).toFixed(2);
+const set = (id, v) => document.getElementById(id).textContent = v;
+fetch("/api/summary").then(r => r.json()).then(d => {
+  if (d.error) throw new Error(d.error);
+  set("revenue", money(d.revenue)); set("orders", d.orders);
+  set("average", money(d.average_order)); set("cancelled", d.cancelled_orders);
+  set("asof", "Data as of " + d.generated_at);
+  document.getElementById("stats").style.display = "";
+}).catch(e => {
+  const el = document.getElementById("error");
+  el.textContent = "Cannot load sales data: " + e.message;
+  el.style.display = "";
+});
+</script>
+</body></html>
