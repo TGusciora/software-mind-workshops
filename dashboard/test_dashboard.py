@@ -175,3 +175,71 @@ def test_page_has_goal_bar_pace_line_and_label(server):
     for needle in ('id="goalbar"', 'id="goalpct"', 'id="required"', 'id="actual"', 'id="pacelabel"', "p.label"):
         assert needle in html
     assert html.index('id="goal"') < html.index('id="stats"')  # headline sits at the top
+
+
+def seed_board():
+    """7 orders: 2 received, 1 preparing, 1 in_oven, 0 ready, 1 out_for_delivery, 1 delivered, 1 cancelled."""
+    ids = [orders.place_order(f"C{i}", "512-555-0100", [{"pizza": "pepperoni", "quantity": i + 1}],
+                              address="1 Main")["order_id"] for i in range(7)]
+    for order_id, steps in zip(ids[2:6], (1, 2, 4, 5)):
+        for _ in range(steps):
+            orders.set_status(order_id)
+    orders.cancel_order(ids[6], "changed mind")
+    return ids
+
+
+def test_board_counts_and_orders_equal_orders_board(db, server):
+    seed_board()
+    status, body = get(server, "/api/board")
+    out, exp = json.loads(body), orders.board()
+    assert status == 200 and out == exp and data.load_board() == exp
+    assert out["counts"] == {"received": 2, "preparing": 1, "in_oven": 1, "ready": 0, "out_for_delivery": 1}
+
+
+def test_board_hides_delivered_and_cancelled(db, server):
+    ids = seed_board()
+    out = json.loads(get(server, "/api/board")[1])
+    shown = [o for group in out["orders"].values() for o in group]
+    assert sorted(o["order_id"] for o in shown) == ids[:5]  # ids[5] delivered, ids[6] cancelled
+    assert "delivered" not in out["counts"] and "cancelled" not in out["counts"]
+    assert all(o["status"] not in ("delivered", "cancelled") for o in shown)
+
+
+def test_board_empty_groups_have_zero_count(db, server):
+    orders.connect().close()  # schema only, zero orders
+    status, body = get(server, "/api/board")
+    out = json.loads(body)
+    assert status == 200 and out["counts"] == {s: 0 for s in orders.STATUSES[:-1]}
+    assert out["orders"] == {s: [] for s in orders.STATUSES[:-1]}
+    html = get(server, "/")[1].decode()
+    assert "Object.entries(d.counts)" in html  # page draws a group per count key, including zeros
+
+
+def test_board_missing_db_returns_shared_error_and_creates_nothing(db, server):
+    status, body = get(server, "/api/board")
+    assert status == 500 and json.loads(body) == data.load_summary()  # same error payload as T-001
+    assert "not found or not readable" in json.loads(body)["error"] and "Traceback" not in body.decode()
+    assert not db.exists()
+
+
+def test_board_read_failure_returns_readable_error(db, server, monkeypatch):
+    seed()
+    monkeypatch.setattr(orders, "board", lambda: (_ for _ in ()).throw(orders.sqlite3.OperationalError("boom")))
+    status, body = get(server, "/api/board")
+    assert status == 500 and json.loads(body) == {"error": "Could not read orders: boom"}
+
+
+def test_board_request_leaves_db_bytes_unchanged(db, server):
+    seed_board()
+    before = hashlib.sha256(db.read_bytes()).hexdigest()
+    assert get(server, "/api/board")[0] == 200
+    assert hashlib.sha256(db.read_bytes()).hexdigest() == before
+
+
+def test_page_board_section_uses_shared_error_banner_and_safe_fields(server):
+    html = get(server, "/")[1].decode()
+    assert 'id="board"' in html and 'fetch("/api/board")' in html
+    assert 'fail("Cannot load order board: "' in html and html.count('id="error"') == 1
+    assert "innerHTML" not in html and "phone" not in html and "address" not in html
+    for field in ("o.order_id", "o.pizzas", "o.fulfillment", "o.total"):
+        assert field in html

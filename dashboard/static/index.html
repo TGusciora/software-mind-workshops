@@ -14,10 +14,19 @@
   <dt>Average order</dt><dd id="average"></dd>
   <dt>Cancelled</dt><dd id="cancelled"></dd>
 </dl>
+<section id="board" style="display:none">
+  <h2>Active orders</h2>
+  <div id="boardcols"></div>
+</section>
 <p id="asof"></p>
 <script>
 const money = n => "$" + Number(n).toFixed(2);
 const set = (id, v) => document.getElementById(id).textContent = v;
+const fail = msg => {  // shared error banner for every panel
+  const el = document.getElementById("error");
+  el.textContent = msg;
+  el.style.display = "";
+};
 fetch("/api/summary").then(r => r.json()).then(d => {
   if (d.error) throw new Error(d.error);
   set("revenue", money(d.revenue)); set("orders", d.orders);
@@ -30,10 +39,22 @@ fetch("/api/summary").then(r => r.json()).then(d => {
   set("asof", "Data as of " + d.generated_at);
   document.getElementById("goal").style.display = "";
   document.getElementById("stats").style.display = "";
-}).catch(e => {
-  const el = document.getElementById("error");
-  el.textContent = "Cannot load sales data: " + e.message;
-  el.style.display = "";
-});
+}).catch(e => fail("Cannot load sales data: " + e.message));
+fetch("/api/board").then(r => r.json()).then(d => {
+  if (d.error) throw new Error(d.error);
+  const cols = document.getElementById("boardcols");
+  // One group per status in d.counts, so an empty status still shows with a count of 0.
+  for (const [status, count] of Object.entries(d.counts)) {
+    const h = document.createElement("h3"), ul = document.createElement("ul");
+    h.textContent = status.replaceAll("_", " ") + ": " + count;
+    for (const o of d.orders[status]) {
+      const li = document.createElement("li");
+      li.textContent = "#" + o.order_id + " " + o.pizzas + " (" + o.fulfillment + ") " + money(o.total);
+      ul.append(li);
+    }
+    cols.append(h, ul);
+  }
+  document.getElementById("board").style.display = "";
+}).catch(e => fail("Cannot load order board: " + e.message));
 </script>
 </body></html>

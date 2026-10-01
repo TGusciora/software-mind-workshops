@@ -40,15 +40,31 @@ def pace(summary: dict, today: date, first_order: date | None = None) -> dict:
     }
 
 
+def _db_error(path: Path) -> dict | None:
+    """Shared guard. Never call orders.connect() on a missing file: it would create the DB."""
+    if not path.is_file() or not os.access(path, os.R_OK):
+        return {"error": f"Orders database not found or not readable: {path}"}
+    return None
+
+
 def load_summary() -> dict:
     """sales_summary() plus pace and generated_at (UTC ISO), or {"error": ...} if the DB is unusable."""
     path = Path(orders.DB_PATH)
-    # Never call orders.connect() on a missing file: it would create the DB.
-    if not path.is_file() or not os.access(path, os.R_OK):
-        return {"error": f"Orders database not found or not readable: {path}"}
+    if error := _db_error(path):
+        return error
     try:
         summary = orders.sales_summary()
         summary["pace"] = pace(summary, orders.now().date(), first_order_date(path))
     except Exception as exc:  # sqlite3.Error etc.; show a readable message, not a stack trace
         return {"error": f"Could not read orders: {exc}"}
     return {**summary, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+
+
+def load_board() -> dict:
+    """orders.board(): active orders grouped by status, or {"error": ...} if the DB is unusable."""
+    if error := _db_error(Path(orders.DB_PATH)):
+        return error
+    try:
+        return orders.board()
+    except Exception as exc:  # same readable error shape as load_summary()
+        return {"error": f"Could not read orders: {exc}"}

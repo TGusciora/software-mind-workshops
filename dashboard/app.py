@@ -24,8 +24,8 @@ class Handler(BaseHTTPRequestHandler):
         path = self.path.split("?")[0]
         if path == "/":
             self._send(200, INDEX.read_bytes(), "text/html; charset=utf-8")
-        elif path == "/api/summary":
-            payload = data.load_summary()
+        elif path in ("/api/summary", "/api/board"):
+            payload = data.load_summary() if path == "/api/summary" else data.load_board()
             self._send(500 if "error" in payload else 200, json.dumps(payload).encode(), "application/json")
         else:
             self._send(404, b"Not found", "text/plain")
