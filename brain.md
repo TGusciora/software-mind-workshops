@@ -3,11 +3,18 @@
 ## Structure
 
 [[.claude/agents/coordinator]]
+[[.claude/agents/discovery]]
 [[.claude/agents/executor]]
 [[.claude/agents/planner]]
 [[.claude/agents/reviewer]]
 [[.claude/memory/template]]
 [[.claude/rules/pineapple]]
+[[.claude/skills/auto-dev/SKILL]]
+[[.claude/skills/auto-dev/references/bugfix]]
+[[.claude/skills/auto-dev/references/discovery]]
+[[.claude/skills/auto-dev/references/execute]]
+[[.claude/skills/auto-dev/references/small-feature]]
+[[.claude/skills/execution-tidy/SKILL]]
 [[.claude/skills/spec-creator/SKILL]]
 [[.claude/skills/user-story-creator/SKILL]]
 [[CLAUDE]]
@@ -15,8 +22,19 @@
 
 ## Architecture
 
+[[docs/specs/owner-sales-dashboard]]
 [[docs/specs/restaurant-location-map]]
 [[docs/stories/interactive-store-map]]
+[[docs/tickets/owner-sales-dashboard/INDEX]]
+[[docs/tickets/owner-sales-dashboard/T-001-dashboard-page-sales-totals-and-error-state]]
+[[docs/tickets/owner-sales-dashboard/T-002-goal-progress-and-daily-pace]]
+[[docs/tickets/owner-sales-dashboard/T-003-active-order-board]]
+[[docs/tickets/owner-sales-dashboard/T-004-top-five-pizzas]]
+[[docs/tickets/owner-sales-dashboard/T-005-low-stock-panel]]
+[[docs/tickets/owner-sales-dashboard/T-006-today-vs-daily-target]]
+[[docs/tickets/owner-sales-dashboard/T-007-mobile-360px-layout]]
+[[docs/tickets/owner-sales-dashboard/T-008-auto-refresh-60s]]
+[[docs/tickets/owner-sales-dashboard/evidence/T-002-goal-progress-and-daily-pace]]
 [[docs/tickets/restaurant-location-map/INDEX]]
 [[docs/tickets/restaurant-location-map/T-001-customer-map-open-store-pins]]
 [[docs/tickets/restaurant-location-map/T-002-store-card-hours-tap-to-call]]
@@ -93,5 +111,6 @@
 ## Other
 
 [[20260930_SM_ClaudeCode_Workshop8]]
+[[dashboard/README]]
 [[inventory-mcp/README]]
 [[orders-mcp/README]]
