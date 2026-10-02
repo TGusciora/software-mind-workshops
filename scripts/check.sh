@@ -30,6 +30,7 @@ for p in $(find . -name package.json -not -path '*/node_modules/*' -not -path '.
 done
 
 # EXTRA: add other repo-wide checks here (lint, type check, ...)
+run "criteria.sh tests" . sh scripts/test_criteria.sh
 
 printf '\n'
 [ "$ran" -eq 0 ] && { echo "check: no test suites found"; exit 1; }
